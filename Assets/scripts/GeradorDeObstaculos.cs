@@ -24,5 +24,9 @@ public class GeradorDeObstaculos : MonoBehaviour
             GameObject.Instantiate(this.manualDeInstrucoes, this.transform.position, Quaternion.identity);
             this.cronometro = this.tempoParaGerar;
         }
+
     }
+    
+
+
 }
