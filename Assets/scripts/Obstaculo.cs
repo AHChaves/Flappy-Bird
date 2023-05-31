@@ -25,4 +25,8 @@ public class Obstaculo : MonoBehaviour
         this.transform.Translate(Vector3.up * Random.Range(-variacaoDaPosicaoY, variacaoDaPosicaoY));
     }
 
+    public void Destruir(){
+        Destroy(this.gameObject);
+    }
+
 }
