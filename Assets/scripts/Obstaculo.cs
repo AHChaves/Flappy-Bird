@@ -5,28 +5,39 @@ using UnityEngine;
 public class Obstaculo : MonoBehaviour
 {
 
-    private float velocidade = 0.05f;
-    [SerializeField]private float variacaoDaPosicaoY;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        this.transform.Translate(Vector3.left * this.velocidade);
-    }
+ [SerializeField] private float velocidade = 5;
+    [SerializeField] private float variacaoDaPosicaoY = 1;
+    private Vector3 posicaoDoAviao;
+    private bool pontuei;
+    private Pontuacao pontuacao;
 
     private void Awake(){
         this.transform.Translate(Vector3.up * Random.Range(-variacaoDaPosicaoY, variacaoDaPosicaoY));
     }
 
+    private void Start(){
+        this.posicaoDoAviao = GameObject.FindObjectOfType<Aviao>().transform.position;
+        this.pontuacao = GameObject.FindObjectOfType<Pontuacao>();
+    }
+
+    private void Update() {
+        this.transform.Translate(Vector3.left * this.velocidade * Time.deltaTime);
+
+
+        //Se a minha posicao for menor que a posicao do aviao 
+        if(!this.pontuei && this.transform.position.x < this.posicaoDoAviao.x){
+            this.pontuei = true;
+            this.pontuacao.AdicionarPontos();
+
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D outro){
+        this.Destruir();
+    }
+
     public void Destruir(){
         Destroy(this.gameObject);
     }
-
 }

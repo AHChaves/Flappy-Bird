@@ -7,6 +7,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject imagemGameOver;
     [SerializeField] private GameObject button;
     private Aviao aviao;
+    private Pontuacao pontuacao;
 
     public void FinalizarJogo(){
         Time.timeScale = 0;
@@ -17,6 +18,7 @@ public class Manager : MonoBehaviour
 
     private void Start(){
         this.aviao = GameObject.FindObjectOfType<Aviao>();
+        this.pontuacao = GameObject.FindObjectOfType<Pontuacao>();
     }
 
     private void DestruirObstaculos(){
@@ -32,6 +34,8 @@ public class Manager : MonoBehaviour
         Time.timeScale = 1;
         this.aviao.Reiniciar();
         this.DestruirObstaculos();
+        this.pontuacao.Reiniciar();
     }
+
 
 }
